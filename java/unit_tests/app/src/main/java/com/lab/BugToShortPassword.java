@@ -1,5 +1,6 @@
 package com.lab;
 
+// Buggy 2: Allows passwords that are too short
 public class BugToShortPassword implements IPassword{
     protected int passwordHash;
 

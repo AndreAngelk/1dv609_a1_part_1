@@ -1,10 +1,10 @@
 package com.lab;
 
 // Buggy 6: isPasswordSame always returns true
-public class BuggyPassword6 implements IPassword {
+public class BugIsPasswordSameAlwaysTrue implements IPassword {
     protected int passwordHash;
     
-    public BuggyPassword6(String pw) throws Exception {
+    public BugIsPasswordSameAlwaysTrue(String pw) throws Exception {
         String trimmedPW = pw.trim();
         if (isToShort(trimmedPW)) {
             throw new Exception("To short password");

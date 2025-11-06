@@ -1,9 +1,9 @@
 package com.lab;
 
-public class Password implements IPassword{
+public class BugWrongHashingAlgorithm implements IPassword{
     protected int passwordHash;
 
-    public Password(String pw) throws Exception {
+    public BugWrongHashingAlgorithm(String pw) throws Exception {
         String trimmedPW = pw.trim(); // Remove whitespace
         if (isToShort(trimmedPW)) {
             throw new Exception("To short password");

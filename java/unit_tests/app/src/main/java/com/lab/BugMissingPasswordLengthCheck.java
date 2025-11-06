@@ -1,10 +1,10 @@
 package com.lab;
 
 // Buggy 4: Does not throw exception for short passwords
-public class BugMissingPasswordCheck implements IPassword {
+public class BugMissingPasswordLengthCheck implements IPassword {
     protected int passwordHash;
 
-    public BugMissingPasswordCheck(String pw) throws Exception {
+    public BugMissingPasswordLengthCheck(String pw) throws Exception {
         String trimmedPW = pw.trim();
         // Bug: missing short password check
         if (containsNumber(trimmedPW) == false) {
