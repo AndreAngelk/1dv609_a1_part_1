@@ -40,7 +40,7 @@ A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper.
   * A test suite for SSNHelper.
   * A test per buggy version.
   * A set of tests to make sure coverage is high
-  * An additional test
+    * An additional test
 
 
 ### Table for checking test suite bug coverage
