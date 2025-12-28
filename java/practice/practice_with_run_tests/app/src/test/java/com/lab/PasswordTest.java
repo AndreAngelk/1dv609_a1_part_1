@@ -1,8 +1,7 @@
 package com.lab;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for Password implementations.
@@ -41,3 +40,5 @@ public class PasswordTest {
         assertTrue(true);
     }
 }
+
+// Temporarily commit 
