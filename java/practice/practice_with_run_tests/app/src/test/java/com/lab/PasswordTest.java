@@ -1,5 +1,8 @@
 package com.lab;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +25,10 @@ import org.junit.jupiter.api.Test;
  */
 
 public class PasswordTest {
+    
     private IPassword getPassword(String s) throws Exception {
         return (IPassword) new Password(s);
         // return (IPassword) new BugDoesNotTrim(s);
-        // return (IPassword) new BugToShortPassword(s);
         // return (IPassword) new BugToShortPassword(s);
         // return (IPassword) new BugVeryShort(s);
         // return (IPassword) new BugWrongExceptionMessage(s);
@@ -33,12 +36,40 @@ public class PasswordTest {
         // return (IPassword) new BugMissingNumberCheck(s);
         // return (IPassword) new BugIsPasswordSameAlwaysTrue(s);
         // return (IPassword) new BugWrongHashingAlgorithm(s);
+        // return (IPassword) new BugNumberMustBeLast(s); // Testing my own bug version i made
+
     }
 
     @Test
-    public void shouldAlwaysPass() throws Exception {
-        assertTrue(true);
+    public void constructorShouldTrimWhitespaceForValidPasswords() throws Exception {
+        IPassword a = getPassword("Abcdefghijk1");
+        IPassword b = getPassword("  Abcdefghijk1  ");
+        assertTrue(a.isPasswordSame(b));
     }
-}
 
-// Temporarily commit 
+    @Test
+    public void constructorShouldThrowExceptionForShortPasswords() {
+        Exception ex = assertThrows(Exception.class, () -> getPassword("Abcdefghij1"));
+        assertEquals("To short password", ex.getMessage());
+    }
+
+    @Test
+    public void constructorShouldThrowExceptionForPasswordsWithoutNumber() {
+        Exception ex = assertThrows(Exception.class, () -> getPassword("Abcdefghijkl"));
+        assertEquals("Does not contain a number", ex.getMessage());
+    }
+
+    @Test
+    public void isPasswordSameShouldReturnFalseForDifferentPasswords() throws Exception {
+        IPassword a = getPassword("Abcdefghijk1");
+        IPassword b = getPassword("Abcdefghijk2");
+        assertFalse(a.isPasswordSame(b));
+    }
+
+    @Test
+    public void getPasswordHashShouldReturnExpectedHashForKnownPassword() throws Exception {
+        IPassword p = getPassword("Abcdefghijk1");
+        assertEquals(-1583411662, p.getPasswordHash());
+    }
+
+}
